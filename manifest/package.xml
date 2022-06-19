@@ -1,36 +1,53 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>*</members>
+        <members>ExceptionEventTriggerHandler</members>
+        <members>GovernanceLimitsWrapper</members>
+        <members>Log</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>*</members>
-        <name>ApexComponent</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexPage</name>
-    </types>
-    <types>
-        <members>*</members>
-        <name>ApexTestSuite</name>
-    </types>
-    <types>
-        <members>*</members>
+        <members>ExceptionEventTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
-        <members>*</members>
-        <name>AuraDefinitionBundle</name>
+        <members>Exception_Log_Platform_Event__e.Additional_Details__c</members>
+        <members>Exception_Log_Platform_Event__e.Class_Name__c</members>
+        <members>Exception_Log_Platform_Event__e.Exception_Message__c</members>
+        <members>Exception_Log_Platform_Event__e.Exception_Stack__c</members>
+        <members>Exception_Log_Platform_Event__e.Exception_Type__c</members>
+        <members>Exception_Log_Platform_Event__e.Governance_Limits__c</members>
+        <members>Exception_Log_Platform_Event__e.Method_Name__c</members>
+        <members>Exception_Log_Platform_Event__e.Related_Record_Id__c</members>
+        <members>Exception_Log__c.Additional_Details__c</members>
+        <members>Exception_Log__c.Class_Name__c</members>
+        <members>Exception_Log__c.Exception_Message__c</members>
+        <members>Exception_Log__c.Exception_Stack__c</members>
+        <members>Exception_Log__c.Exception_Type__c</members>
+        <members>Exception_Log__c.Governance_Limits__c</members>
+        <members>Exception_Log__c.Method_Name__c</members>
+        <members>Exception_Log__c.Related_Record_Id__c</members>
+        <members>Platform_Event_Logging_Setting__mdt.enableLogging__c</members>
+        <name>CustomField</name>
     </types>
     <types>
-        <members>*</members>
-        <name>LightningComponentBundle</name>
+        <members>Platform_Event_Logging_Setting.Main_Switch</members>
+        <name>CustomMetadata</name>
     </types>
     <types>
-        <members>*</members>
-        <name>StaticResource</name>
+        <members>Exception_Log_Platform_Event__e</members>
+        <members>Exception_Log__c</members>
+        <members>Platform_Event_Logging_Setting__mdt</members>
+        <name>CustomObject</name>
     </types>
-    <version>54.0</version>
+    <types>
+        <members>Exception_Log__c</members>
+        <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Exception_Log__c-Exception Log Layout</members>
+        <members>Platform_Event_Logging_Setting__mdt-Platform Event Logging Setting Layout</members>
+        <name>Layout</name>
+    </types>
+    <version>53.0</version>
 </Package>
