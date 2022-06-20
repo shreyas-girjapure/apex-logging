@@ -11,6 +11,10 @@
         <name>ApexTrigger</name>
     </types>
     <types>
+        <members>Apex_Logging</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
         <members>Exception_Log_Platform_Event__e.Additional_Details__c</members>
         <members>Exception_Log_Platform_Event__e.Class_Name__c</members>
         <members>Exception_Log_Platform_Event__e.Exception_Message__c</members>
@@ -48,6 +52,10 @@
         <members>Exception_Log__c-Exception Log Layout</members>
         <members>Platform_Event_Logging_Setting__mdt-Platform Event Logging Setting Layout</members>
         <name>Layout</name>
+    </types>
+    <types>
+        <members>Exception_Log__c.All</members>
+        <name>ListView</name>
     </types>
     <version>53.0</version>
 </Package>
