@@ -1,10 +1,13 @@
-// Use .apex files to store anonymous Apex.
-// You can execute anonymous Apex in VS Code by selecting the
-//     apex text and running the command:
-//     SFDX: Execute Anonymous Apex with Currently Selected Text
-// You can also execute the entire file by running the command:
-//     SFDX: Execute Anonymous Apex with Editor Contents
+//Anonymous Code for Raising Platform Event.
 
-string tempvar = 'Enter_your_name_here';
-System.debug('Hello World!');
-System.debug('My name is ' + tempvar);
+Exception_Log_Platform_Event__e event = new Exception_Log_Platform_Event__e(
+    	Additional_Details__c='Additonal Details',
+    	Class_Name__c = 'Class Shreyas',
+    	Exception_Message__c ='Exception Message',
+    	Exception_Stack__c='Exception Hello',
+    	Exception_Type__c ='Exception Type',
+    	Governance_Limits__c='Governance Limits',
+    	Method_Name__c='Method Name',
+    	Related_Record_Id__c='Related Record'
+);
+EventBus.publish(event);
