@@ -1,0 +1,35 @@
+<template>
+    <div class="container">
+        <div class="slds-p-around_x-small slds-border_bottom slds-theme_shade">
+            <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                <div>
+                    <span class="slds-badge">{logdata.length}</span>
+                </div>
+                <div>
+                    <lightning-input type="search" label="Search Logs" onchange={handleSearch}></lightning-input>
+                </div>
+                <div>
+                    <lightning-button-group>
+                        <lightning-button variant="border-filled" label="Subscribe"
+                            onclick={handleSubscribe} disabled={isSubscribeDisabled}
+                        ></lightning-button>
+                        <lightning-button variant="border-filled" label="Unsubscribe"
+                            onclick={handleUnsubscribe} disabled={isUnsubscribeDisabled}
+                        ></lightning-button>
+                        <lightning-button onclick={clearAll} icon-name="utility:delete" label="Clear all"
+                            variant="border-filled"></lightning-button>
+                    </lightning-button-group>
+                </div>
+            </div>
+        </div>
+
+        <div class="slds-container_fluid slds-scrollable_x content">
+            <lightning-datatable
+                    key-field={id}
+                    data={logdata}
+                    columns={columns}>
+            </lightning-datatable>
+        </div>
+    
+    </div>
+</template>
