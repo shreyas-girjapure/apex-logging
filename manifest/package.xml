@@ -49,9 +49,17 @@
         <name>CustomTab</name>
     </types>
     <types>
+        <members>Apex_Logging_UtilityBar1</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
         <members>Exception_Log__c-Exception Log Layout</members>
         <members>Platform_Event_Logging_Setting__mdt-Platform Event Logging Setting Layout</members>
         <name>Layout</name>
+    </types>
+    <types>
+        <members>logMonitor</members>
+        <name>LightningComponentBundle</name>
     </types>
     <types>
         <members>Exception_Log__c.All</members>
