@@ -1,11 +1,12 @@
 import { LightningElement, track } from 'lwc';
 import { subscribe, unsubscribe, onError } from 'lightning/empApi';
 const columns = [
-    { label: 'Exception Message', fieldName: 'Exception_Message__c' },
+    { label: 'Class Name', fieldName: 'Class_Name__c' },
     { label: 'Method Name', fieldName: 'Method_Name__c' },
-    { label: 'CreatedDate', fieldName: 'CreatedDate' },
     { label: 'Exception Type', fieldName: 'Exception_Type__c' },
-    { label: 'Class Name', fieldName: 'Class_Name__c' }
+    { label: 'Exception Message', fieldName: 'Exception_Message__c' },
+    { label: 'Exception Stack', fieldName: 'Exception_Stack__c' },
+    { label: 'CreatedDate', fieldName: 'CreatedDate' }
 ];
 
 export default class LogMonitor extends LightningElement {
