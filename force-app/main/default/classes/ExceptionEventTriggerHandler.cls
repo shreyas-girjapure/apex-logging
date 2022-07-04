@@ -4,7 +4,7 @@ public with sharing class ExceptionEventTriggerHandler {
 
     }
     //ExceptionEventTriggerHandler.errorCausing();
-    public static void errorCausing()
+    public void errorCausing()
     {
         try{
             List<Account> acList = new List<Account>();
@@ -19,7 +19,9 @@ public with sharing class ExceptionEventTriggerHandler {
         }
         catch (Exception ex)
         {
-            ExceptionEventTriggerHandler.getExData(ex);
+            Log l = new Log();
+            l.raisePlatformEvent(ex);
+            //Log.raisePlatformEvent(ex);
         }
     }
     /**

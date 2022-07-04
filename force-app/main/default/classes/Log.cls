@@ -12,7 +12,18 @@ public without sharing class Log {
      * @description Method raises platform event to the bus/channel
      * @return   returns true if event raised succesfully
      */
-    public Boolean raisePlatformEvent(){
+    public  Boolean raisePlatformEvent(Exception ex){
+        Exception_Log_Platform_Event__e event = new Exception_Log_Platform_Event__e(
+    	Additional_Details__c=getAdditionalInfo(ex),
+    	Class_Name__c = getClassName(ex),
+    	Exception_Message__c =getExceptionMessage(ex),
+    	Exception_Stack__c=getStackTrace(ex),
+    	Exception_Type__c =getExceptionTypeName(ex),
+    	Governance_Limits__c=getQueryLimit(ex),
+    	Method_Name__c=getMethodeName(ex),
+    	Related_Record_Id__c=''
+        );
+        EventBus.publish(event);
         System.debug(LoggingLevel.ERROR, 'raisePlatformEvent');
         return true;        
     }
@@ -75,6 +86,7 @@ public without sharing class Log {
      * @return    returns methode name.
      * */
     private String getMethodeName(Exception ex){
+        String className = getClassName(ex);
         return  ex.getStackTraceString()?.substringBefore('\n').substringBefore(':')?.substringAfter(className)?.substringAfter('.');
     }
     /**
@@ -98,7 +110,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns Line number of Exception oaccur file.
      */
-    private String getLinenumber(Exception ex){
+    private Integer getLinenumber(Exception ex){
         return  ex.getLineNumber();
     }
     /**
@@ -120,20 +132,20 @@ public without sharing class Log {
         String additionalDetails = '';           
         if(String.isNotBlank(exceptionTypeName) && exceptionTypeName.equalsIgnoreCase('DMLException'))
         {
-            additionalDetails = ExceptionEventTriggerHandler.getDMLData((DMLException)e);
+            additionalDetails = Log.getDMLData((DMLException)ex);
            
         }
         if(String.isNotBlank(exceptionTypeName) && exceptionTypeName.equalsIgnoreCase('QueryException'))
         {
            //Commenting temporary 
-            additionalDetails += getQueryData((QueryException)e);
+            additionalDetails += getQueryData((QueryException)ex);
         }
         return additionalDetails;
     }
     /**
      * Purpose : To export DMLException causing field
      */
-    private static string getDMLData(Exception eRecord)
+    private static string getDMLData(DmlException eRecord)
     {
         Integer filedCount = eRecord.getNumDml();
         String DMLdetails = '';
