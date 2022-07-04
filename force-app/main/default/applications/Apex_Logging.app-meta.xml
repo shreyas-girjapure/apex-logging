@@ -12,4 +12,5 @@
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
     <uiType>Lightning</uiType>
+    <utilityBar>Apex_Logging_UtilityBar1</utilityBar>
 </CustomApplication>

@@ -1,6 +1,6 @@
 public with sharing class ExceptionEventTriggerHandler {
     public ExceptionEventTriggerHandler() {
-        
+    System.debug('');      
 
     }
     //ExceptionEventTriggerHandler.errorCausing();

@@ -1,5 +1,6 @@
 public without sharing class Log {
 
+
     /**
      * @description Method for raising request for exception insertiong flow
      * @param  exception Expected Exception object instance for calculating extra details
