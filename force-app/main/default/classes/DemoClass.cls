@@ -1,4 +1,7 @@
 public with sharing class DemoClass {
+    public DemoClass() {
+
+    }
     //DemoClass.raiseDMLException();
     public static void raiseDMLException()
     {
