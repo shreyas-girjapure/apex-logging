@@ -14,7 +14,7 @@ public with sharing class DemoClass {
             // List<Account> accounts = [SELECT Website, (SELECT Email FROM Contacts) FROM Account WITH USER_MODE];
         }
         catch (Exception ex){            
-            Log.raisePlatformEvent(ex);           
+            Log.raisePlatformEvent(ex);          
         }
     }
     // Slow debug method for CPU time display
