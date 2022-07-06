@@ -14,11 +14,5 @@ EventBus.publish(event);
 
 
 // Error Causing method 
+
 DemoClass.errorCausing();
-
-// Slow debug method 
-DemoClass.slowDebugMethod();
-
-
-// Old Log utility method
-DemoClass.errorCausingRegular();

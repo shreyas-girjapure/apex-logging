@@ -169,17 +169,6 @@ public without sharing class Log {
             inaccessinleFieldWithApiName += objectApi +'\t'+ inaccessibleFields.get(objectApi)+'\n';
         }
         return inaccessinleFieldWithApiName;
-    }
-    public static void logExceptionOld(String className, String methodName , String errorString){
-        Exception_Log__c exInstance = new Exception_Log__c();
-        exInstance.Additional_Details__c = 'Here are some additional details';
-        exInstance.Class_Name__c  = className;
-        exInstance.Exception_Message__c = errorString;
-        exInstance.Exception_Stack__c ='exEvent?.Exception_Stack__c;';
-        exInstance.Exception_Type__c ='exEvent?.Exception_Type__c';
-        exInstance.Governance_Limits__c ='exEvent?.Governance_Limits__c';
-        exInstance.Method_Name__c = methodName;
-        insert exInstance;
     } 
     
 }

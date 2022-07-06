@@ -7,7 +7,6 @@
     <columns>Exception_Message__c</columns>
     <columns>Exception_Type__c</columns>
     <columns>Exception_Stack__c</columns>
-    <columns>CREATED_DATE</columns>
-    <filterScope>Everything</filterScope>
+    <filterScope>Mine</filterScope>
     <label>All</label>
 </ListView>

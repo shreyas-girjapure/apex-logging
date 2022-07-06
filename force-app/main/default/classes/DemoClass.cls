@@ -1,7 +1,10 @@
 public with sharing class DemoClass {
+    public DemoClass() {
 
-    //DemoClass.errorCausing();
-    public static void errorCausing(){
+    }
+    //DemoClass.raiseDMLException();
+    public static void raiseDMLException()
+    {
         try{
             List<Account> acList = new List<Account>();
             Account ac = new Account();
@@ -11,7 +14,20 @@ public with sharing class DemoClass {
             acList.add(ac);
             acList.add(ac1);            
             insert acList;
-            // List<Account> accounts = [SELECT Website, (SELECT Email FROM Contacts) FROM Account WITH USER_MODE];
+            
+            }
+        catch (Exception ex)
+        {            
+            Log.raisePlatformEvent(ex);
+            //Log.raisePlatformEvent(ex);
+        }
+    }
+    public static void queryDMLException()
+    {
+        try{
+            List<Account> acList = new List<Account>();
+            //to execute below exception remove FLS of System admin for Website field
+             List<Account> accounts = [SELECT Website, (SELECT Email FROM Contacts) FROM Account WITH USER_MODE];
         }
         catch (Exception ex){            
             Log.raisePlatformEvent(ex);          
