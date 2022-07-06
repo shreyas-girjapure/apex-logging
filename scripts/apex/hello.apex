@@ -16,3 +16,6 @@ EventBus.publish(event);
 // Error Causing method 
 
 DemoClass.errorCausing();
+
+// Old Log utility method
+DemoClass.errorCausingRegular();
