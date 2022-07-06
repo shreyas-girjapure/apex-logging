@@ -12,7 +12,7 @@ public without sharing class Log {
      * @description Method raises platform event to the bus/channel
      * @return   returns true if event raised succesfully
      */
-    public  Boolean raisePlatformEvent(Exception ex){
+    public static void raisePlatformEvent(Exception ex){
         Exception_Log_Platform_Event__e event = new Exception_Log_Platform_Event__e(
     	Additional_Details__c=getAdditionalInfo(ex),
     	Class_Name__c = getClassName(ex),
@@ -24,14 +24,13 @@ public without sharing class Log {
     	Related_Record_Id__c=''
         );
         EventBus.publish(event);
-        System.debug(LoggingLevel.ERROR, 'raisePlatformEvent');
-        return true;        
+        System.debug('raisePlatformEvent');       
     }
     /**
      * @description Calculates current scope governance limits used
      * @return   returns various limits details as wrapper object 
      */
-    public GovernanceLimitsWrapper calculateGovernanceLimits(){
+    public static GovernanceLimitsWrapper calculateGovernanceLimits(){
         GovernanceLimitsWrapper wrapper = new GovernanceLimitsWrapper();
         return wrapper;
     }
@@ -41,7 +40,7 @@ public without sharing class Log {
      * @param  wrapper Accepts GovernanceLimitsWrapper instance
      * @return         returns formatted string. To be inserted to DB
      */
-    public string formatGovernanceLimits(GovernanceLimitsWrapper wrapper){
+    public static string formatGovernanceLimits(GovernanceLimitsWrapper wrapper){
 
         System.debug(LoggingLevel.ERROR, 'formatGovernanceLimits');
         return 'test';
@@ -50,7 +49,7 @@ public without sharing class Log {
      * @description Method determines if all the framework code is to be used
      * @return   returns true if it is enabled
      */
-    public Boolean isLoggingEnabled(){
+    public static Boolean isLoggingEnabled(){
         //This check depends on metadata record created. Need to add logic for determining if it is to be enabled.
         return true;
     }
@@ -59,7 +58,7 @@ public without sharing class Log {
      * @param  ex Exception instance to be handled.
      * @return    returns literal Exception_Log__c object.
      */
-    public Exception_Log__c handleInboundException(Exception ex){
+    public static Exception_Log__c handleInboundException(Exception ex){
         Exception_Log__c exObject = new Exception_Log__c();
         return exObject;
     }
@@ -68,7 +67,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns Stack Trace.
      */
-    private String getStackTrace(Exception ex)
+    private static String getStackTrace(Exception ex)
     {
         return ex?.getStackTraceString();
     }
@@ -77,7 +76,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns class name.
      */
-    private String getClassName(Exception ex){
+    private static String getClassName(Exception ex){
         return   ex.getStackTraceString()?.substringBefore('\n').substringAfter('.')?.substringBefore('.');
     }
     /**
@@ -85,7 +84,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns methode name.
      * */
-    private String getMethodeName(Exception ex){
+    private static String getMethodeName(Exception ex){
         String className = getClassName(ex);
         return  ex.getStackTraceString()?.substringBefore('\n').substringBefore(':')?.substringAfter(className)?.substringAfter('.');
     }
@@ -94,7 +93,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns Exception type. 
      */
-    private String getExceptionTypeName(Exception ex){
+    private static String getExceptionTypeName(Exception ex){
         return  ex.getTypeName()?.substringAfter('.');
     }
     /**
@@ -102,7 +101,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns Exception message.
      */
-    private String getExceptionMessage(Exception ex){
+    private static String getExceptionMessage(Exception ex){
         return  ex.getMessage();
     }
     /**
@@ -110,7 +109,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns Line number of Exception oaccur file.
      */
-    private Integer getLinenumber(Exception ex){
+    private static Integer getLinenumber(Exception ex){
         return  ex.getLineNumber();
     }
     /**
@@ -118,7 +117,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns Limits details.
      */
-    private String getQueryLimit(Exception ex){
+    private static String getQueryLimit(Exception ex){
         return   '1. SOQL Queries used / SOQL Queries allowed: ' + Limits.getQueries() + '/' + Limits.getLimitQueries() + '\n'+'2. Number of records queried so far /  Number allowed: ' + Limits.getDmlRows() + '/' + Limits.getLimitDmlRows() +'\n' + '3. Number of DML statements used so far / Number allowed: ' +  Limits.getDmlStatements() + '/' + Limits.getLimitDmlStatements() + '\n' +'4. Amount of CPU time (in ms) used so far / CPU usage time (in ms) allowed: ' + Limits.getCpuTime() + '/' + Limits.getLimitCpuTime() ;
     }
 
@@ -127,7 +126,7 @@ public without sharing class Log {
      * @param  ex Exception instance.
      * @return    returns Additional details.
      */
-    private String getAdditionalInfo(Exception ex){
+    private static String getAdditionalInfo(Exception ex){
         String exceptionTypeName =getExceptionTypeName(ex);
         String additionalDetails = '';           
         if(String.isNotBlank(exceptionTypeName) && exceptionTypeName.equalsIgnoreCase('DMLException'))
@@ -142,29 +141,32 @@ public without sharing class Log {
         }
         return additionalDetails;
     }
+
     /**
-     * Purpose : To export DMLException causing field
+     * @description getDMLData Extracting extra details from DML exception
+     * @param  eRecord eRecord exception record
+     * @return         return extra details
      */
-    private static string getDMLData(DmlException eRecord)
-    {
-        Integer filedCount = eRecord.getNumDml();
-        String DMLdetails = '';
-        for(Integer i=0;i<filedCount;i++)
-        {
-            DMLdetails =eRecord.getDmlId(i) +'\t'+eRecord.getDmlFieldNames(i)+'\t'+eRecord.getDmlMessage(i) +'\t'+eRecord.getDmltype(i)+'\n';
+    private static string getDMLData(DmlException eRecord){
+        Integer fieldCount = eRecord.getNumDml();
+        String dmlDetails = '';
+        for(Integer i=0;i<fieldCount;i++){
+            dmlDetails =eRecord.getDmlId(i) +'\t'+eRecord.getDmlFieldNames(i)+'\t'+eRecord.getDmlMessage(i) +'\t'+eRecord.getDmltype(i)+'\n';
         }
-        return DMLdetails;
+        return dmlDetails;
     }
+
     /**
-     * Purpose : To export QueryException causing field
+     * @description getQueryData Extracting extra details from Query exception
+     * @param  eRecord eRecord exception record
+     * @return         return extra details
      */
-    private static string getQueryData(QueryException eRecord)
-    {
+    private static string getQueryData(QueryException eRecord){
         String inaccessinleFieldWithApiName ='';
         Map<String, Set<String>> inaccessibleFields = eRecord.getInaccessibleFields();
-        for(String ObkectApi :inaccessibleFields.keySet() )
+        for(String objectApi :inaccessibleFields.keySet() )
         {
-            inaccessinleFieldWithApiName += ObkectApi +'\t'+ inaccessibleFields.get(ObkectApi)+'\n';
+            inaccessinleFieldWithApiName += objectApi +'\t'+ inaccessibleFields.get(objectApi)+'\n';
         }
         return inaccessinleFieldWithApiName;
     } 

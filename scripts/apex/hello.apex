@@ -11,3 +11,8 @@ Exception_Log_Platform_Event__e event = new Exception_Log_Platform_Event__e(
     	Related_Record_Id__c='Related Record'
 );
 EventBus.publish(event);
+
+
+// Error Causing method 
+
+DemoClass.errorCausing();

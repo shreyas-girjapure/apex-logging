@@ -6,7 +6,7 @@ trigger ExceptionEventTrigger on Exception_Log_Platform_Event__e (after insert) 
    Exception_Log__c exceptionInstance = new Exception_Log__c();
    for(Exception_Log_Platform_Event__e exEvent : trigger.new)
    {
-    //clear previos instance fields
+    //clear previous instance fields
     exceptionInstance.clear();
     exceptionInstance.Additional_Details__c =exEvent?.Additional_Details__c;
     exceptionInstance.Class_Name__c  =exEvent?.Class_Name__c;
@@ -16,8 +16,7 @@ trigger ExceptionEventTrigger on Exception_Log_Platform_Event__e (after insert) 
     exceptionInstance.Governance_Limits__c =exEvent?.Governance_Limits__c;
     exceptionInstance.Method_Name__c =exEvent?.Method_Name__c;
     //Check for null stack trace
-    if(String.isNotBlank(exceptionInstance.Exception_Stack__c))
-    {
+    if(String.isNotBlank(exceptionInstance.Exception_Stack__c)){
         exceptionListToInsert.add(exceptionInstance);
     }
    }

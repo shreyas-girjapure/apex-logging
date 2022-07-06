@@ -1,28 +1,6 @@
 public with sharing class ExceptionEventTriggerHandler {
     public ExceptionEventTriggerHandler() {
-    System.debug('');      
-
-    }
-    //ExceptionEventTriggerHandler.errorCausing();
-    public void errorCausing()
-    {
-        try{
-            List<Account> acList = new List<Account>();
-            Account ac = new Account();
-            ac.Site = 'okGoogle';
-            ac.Name = 'ok';
-            Account ac1 = new Account();
-            acList.add(ac);
-            acList.add(ac1);
-            insert acList;
-          // List<Account> accounts = [SELECT Website, (SELECT Email FROM Contacts) FROM Account WITH USER_MODE];
-        }
-        catch (Exception ex)
-        {
-            Log l = new Log();
-            l.raisePlatformEvent(ex);
-            //Log.raisePlatformEvent(ex);
-        }
+        System.debug('');
     }
     /**
      * purpose : To extract data from Exception log
@@ -78,9 +56,9 @@ public with sharing class ExceptionEventTriggerHandler {
     {
         String inaccessinleFieldWithApiName ='';
         Map<String, Set<String>> inaccessibleFields = eRecord.getInaccessibleFields();
-        for(String ObkectApi :inaccessibleFields.keySet() )
+        for(String objectApi :inaccessibleFields.keySet() )
         {
-            inaccessinleFieldWithApiName += ObkectApi +'\t'+ inaccessibleFields.get(ObkectApi)+'\n';
+            inaccessinleFieldWithApiName += objectApi +'\t'+ inaccessibleFields.get(objectApi)+'\n';
         }
         return inaccessinleFieldWithApiName;
     } 
