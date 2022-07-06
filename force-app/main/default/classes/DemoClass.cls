@@ -1,10 +1,7 @@
 public with sharing class DemoClass {
-    public DemoClass() {
 
-    }
     //DemoClass.errorCausing();
-    public static void errorCausing()
-    {
+    public static void errorCausing(){
         try{
             List<Account> acList = new List<Account>();
             Account ac = new Account();
@@ -16,10 +13,14 @@ public with sharing class DemoClass {
             insert acList;
             // List<Account> accounts = [SELECT Website, (SELECT Email FROM Contacts) FROM Account WITH USER_MODE];
         }
-        catch (Exception ex)
-        {            
+        catch (Exception ex){            
             Log.raisePlatformEvent(ex);
             //Log.raisePlatformEvent(ex);
+        }
+    }
+    public static void slowDebugMethod(){
+        for(Integer i = 0 ; i < 100000 ;i++){
+            System.debug('slowing down');
         }
     }
 }
