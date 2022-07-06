@@ -15,7 +15,8 @@ EventBus.publish(event);
 
 // Error Causing method 
 
-DemoClass.errorCausing();
+DemoClass.raiseDMLException();
+DemoClass.queryDMLException();
 
 // Old Log utility method
 DemoClass.errorCausingRegular();
