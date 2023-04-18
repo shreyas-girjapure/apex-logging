@@ -41,6 +41,7 @@ export default class LogMonitor extends LightningElement {
             this.tableValue.push(colval[1]);
         }
         console.log('tableValue>>'+this.tableValue);
+         console.log('tableValue>>');
         this.handleSubscribe();
     }
 
